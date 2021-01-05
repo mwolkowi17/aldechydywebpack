@@ -12,7 +12,14 @@ import {buttonChange, buttonClick} from './button';
 'use strict';
 
 /* global THREE */
-
+buttonChange.addEventListener('mousedown', onMouseDown);
+ 
+function onMouseDown(){
+  buttonClick();
+  main();
+  
+  
+}
 
 function main() {
   const canvas = document.querySelector('#c');
@@ -29,14 +36,7 @@ function main() {
 
   const scene = new THREE.Scene();
 
-  buttonChange.addEventListener('mousedown', onMouseDown);
  
-  function onMouseDown(){
-    buttonClick();
-    main();
-    
-    
-  }
 
   camera.add(light);
   scene.add(camera);

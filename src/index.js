@@ -29,10 +29,13 @@ function main() {
 
   const scene = new THREE.Scene();
 
-  buttonChange.addEventListener('mousedown',onMouseDown);
+  buttonChange.addEventListener('mousedown', onMouseDown);
  
   function onMouseDown(){
     buttonClick();
+    main();
+    
+    
   }
 
   camera.add(light);

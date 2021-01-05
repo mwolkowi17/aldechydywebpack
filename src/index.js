@@ -5,20 +5,20 @@ import { light } from './lightbase';
 import { light2 } from './lightdirect';
 import { camera } from './camerabase';
 import { loadManager, objLoader, mtlLoader } from './loadingModule';
-import {tytul,tytulobj} from './loadingModule';
+import { tytul, tytulobj } from './loadingModule';
 import { controls } from './controlsModule';
-import {buttonChange, buttonClick} from './button';
+import { buttonChange, buttonClick } from './button';
 
 'use strict';
 
 /* global THREE */
 buttonChange.addEventListener('mousedown', onMouseDown);
- 
-function onMouseDown(){
+
+function onMouseDown() {
   buttonClick();
   main();
-  
-  
+
+
 }
 
 function main() {
@@ -36,7 +36,7 @@ function main() {
 
   const scene = new THREE.Scene();
 
- 
+
 
   camera.add(light);
   scene.add(camera);
@@ -44,7 +44,8 @@ function main() {
   scene.add(light2);
   scene.add(light2.target);
 
-  
+  const loadingElem = document.querySelector('#loading');
+  const progressBarElem = loadingElem.querySelector('.spinner-border text-primary');
 
   mtlLoader.load(tytul, (materials) => {
     //materials.depthWrite = false;
@@ -57,6 +58,14 @@ function main() {
       scene.add(object);
     });
   });
+
+  loadManager.onLoad = () => {
+    loadingElem.style.display = 'none';
+  }
+  loadManager.onProgress = (urlOfLastItemLoaded, itemsLoaded, itemsTotal) => {
+    const progress = itemsLoaded / itemsTotal;
+    //progressBarElem.style.transform = `scaleX(${progress})`;
+  };
 
   function resizeRendererToDisplaySize(renderer) {
     const canvas = renderer.domElement;

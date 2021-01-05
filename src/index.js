@@ -5,11 +5,14 @@ import { light } from './lightbase';
 import { light2 } from './lightdirect';
 import { camera } from './camerabase';
 import { loadManager, objLoader, mtlLoader } from './loadingModule';
+import {tytul,tytulobj} from './loadingModule';
 import { controls } from './controlsModule';
+import {buttonChange, buttonClick} from './button';
 
 'use strict';
 
 /* global THREE */
+
 
 function main() {
   const canvas = document.querySelector('#c');
@@ -26,13 +29,19 @@ function main() {
 
   const scene = new THREE.Scene();
 
+  buttonChange.addEventListener('mousedown',onMouseDown);
+ 
+  function onMouseDown(){
+    buttonClick();
+  }
+
   camera.add(light);
   scene.add(camera);
 
   scene.add(light2);
   scene.add(light2.target);
 
-  let tytul = 'aldechydy_772.mtl'
+  
 
   mtlLoader.load(tytul, (materials) => {
     //materials.depthWrite = false;
@@ -40,7 +49,7 @@ function main() {
     //materials.side = THREE.FrontSide;
     materials.preload()
     objLoader.setMaterials(materials);
-    objLoader.load('aldechydy_772.obj', (object) => {
+    objLoader.load(tytulobj, (object) => {
 
       scene.add(object);
     });

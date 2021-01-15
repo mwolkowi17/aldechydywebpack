@@ -10,3 +10,4 @@ export const controls = new OrbitControls(camera, canvas);
     //controls.minPolarAngle=1.57;
     controls.enablePan = false;
     controls.autoRotate = controlRotation; // autorotate control
+    controls.autoRotateSpeed = 2.0;

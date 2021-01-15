@@ -21,6 +21,8 @@ function onMouseDown() {
 
 }
 
+let rotateflag = 0;
+
 function main() {
   const canvas = document.querySelector('#c');
   const heightRatio = 1;
@@ -83,7 +85,11 @@ function main() {
     requestAnimationFrame(animate);
 
     // required if controls.enableDamping or controls.autoRotate are set to true
-    controls.update();
+    
+   
+      controls.update();
+    
+    rotateflag++;
 
     renderer.render(scene, camera);
 
@@ -104,8 +110,11 @@ function main() {
   }
 
   requestAnimationFrame(render);
+  if (rotateflag === 0) 
+  {
   animate();
-
+  console.log("animate");
+  }
 }
 
 main();
